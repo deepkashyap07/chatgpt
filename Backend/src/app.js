@@ -4,22 +4,32 @@ import cors from "cors";
 import authRouter from "../routes/auth.routes.js";
 import chatRouter from "../routes/chat.routes.js";
 import path from "path";
+import { fileURLToPath } from "url";
+
+// ✅ Recreate __dirname in ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true,
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
+// ✅ Serve static files
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.use("/api/auth",authRouter)
-app.use("/api/chat",chatRouter)
+// ✅ API routes
+app.use("/api/auth", authRouter);
+app.use("/api/chat", chatRouter);
 
-app.get("*name",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../public/index.html"))
-})
+// ✅ Catch-all route for SPA (React/Vite build)
+app.get("*name", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 export default app;
