@@ -26,5 +26,22 @@ async function createChat(req,res){
         
     }
 }
-
+async function getChats(req,res){
+    try {
+        const user = req.user;
+        const chats = await chatModel.find({user:user._id});
+        res.status(200).json({
+            message:"chats fetched successfully",       
+            chats:chats.map(chat => ({
+                _id:chat._id,
+                title:chat.title,
+                lastActive:chat.lastActivity,
+                user:chat.user
+            }))
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:"internal server error"
+        })
+    }   }
 export { createChat}
