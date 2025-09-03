@@ -44,4 +44,18 @@ async function getChats(req,res){
             message:"internal server error"
         })
     }   }
-export { createChat}
+
+
+    async function getMessages(req, res) {
+
+    const chatId = req.params.id;
+
+    const messages = await messageModel.find({ chat: chatId }).sort({ createdAt: 1 });
+
+    res.status(200).json({
+        message: "Messages retrieved successfully",
+        messages: messages
+    })
+
+}
+export { createChat,getChats,getMessages}
