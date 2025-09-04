@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:5173","https://chatgpt-hw6n.onrender.com"],
+    origin: ["http://localhost:5173","https://chatgpt-tu26.onrender.com"],
     credentials: true,
 }));
 

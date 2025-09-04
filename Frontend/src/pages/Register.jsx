@@ -18,7 +18,7 @@ const Register = () => {
         setSubmitting(true);
         console.log(form);
 
-        axios.post("https://chatgpt-hw6n.onrender.com/api/auth/register", {
+        axios.post("https://chatgpt-tu26.onrender.com/api/auth/register", {
             email: form.email,
             fullName: {
                 firstName: form.firstname,
